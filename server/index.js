@@ -8,6 +8,12 @@ const massive = require('massive');
 
 app.use(bodyParser.json());
 
+app.get('/api/inventory', ct.getAll);
+// app.post('/api/product', ct.create);
+// app.get('/api/product/:id', ct.getOne);
+// app.put('/api/product/:id', ct.update);
+// app.delete('/api/product/:id', ct.delete);
+
 const port = 3008;
 
 massive(process.env.CONNECTIONS).then(dbSet => {
