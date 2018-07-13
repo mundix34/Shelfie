@@ -39,12 +39,21 @@ class Form extends Component {
         })
     }
     addProduct(){
-        let newProducts = [...this.state.products]
-        newProducts.push({name: this.state.name, price: this.state.price, imageurl: this.state.imageurl})
-        this.setState({
-            products: newProducts
+        // let newProducts = [...this.state.products]
+        // newProducts.push({name: this.state.name, price: this.state.price, imageurl: this.state.imageurl})
+        // this.setState({
+        //     products: newProducts
+        let newProduct= {
+            name: this.state.name,
+            price: this.state.price,
+            imageurl: this.state.imageurl,
+          };
+        axios.post('api/product', newProduct)
+        .then((results) =>{
+            this.setState({products: results.data})
         })
     }
+    
     
     renders(){
         return (
