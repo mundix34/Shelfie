@@ -9,14 +9,14 @@ const massive = require('massive');
 app.use(bodyParser.json());
 
 app.get('/api/inventory', ct.getAll);
-// app.post('/api/product', ct.create);
+app.post('/api/product', ct.create);
 // app.get('/api/product/:id', ct.getOne);
 // app.put('/api/product/:id', ct.update);
 // app.delete('/api/product/:id', ct.delete);
 
-const port = 3008;
+const port = process.env.PORT || 3008;
 
-massive(process.env.CONNECTIONS).then(dbSet => {
+massive( process.env.CONNECTIONS).then(dbSet => {
     app.set('db', dbSet)
 }).catch(err => console.log(err))
 
