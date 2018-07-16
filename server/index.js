@@ -16,9 +16,9 @@ app.post('/api/product', ct.create);
 
 const port = 3008;
 
-// massive( process.env.CONNECTIONS).then(dbSet => {
-//     app.set('db', dbSet)
-// }).catch(err => console.log(err))
+massive( process.env.CONNECTIONS).then(dbSet => {
+    app.set('db', dbSet)
+}).catch(err => console.log(err))
 
 app.listen(port, () => {
     console.log(`listening on port: ${port}`);
