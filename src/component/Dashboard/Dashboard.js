@@ -1,32 +1,42 @@
 import React, {Component} from 'react';
-import Product from '../Product/Product'
+import Product from '../Product/Product';
 class Dashboard extends Component{
     constructor(props){
                 super(props)
-                this.state ={
-                    products:this.props.products
+                this.state = {
+                    products: this.props.products
                     
                 }
             }
         
         
         render(){
-        const products = this.state.products.map( (element, i) => 
-        (<h3 key = {i}>{element}</h3>))
+        const newProducts = this.state.products.map( (element, i) => 
+        (<div key = {element.id}>{element.name}
+            {element.price}
+            {element.imageurl}
+            <button onClick={() => this.deleteProduct(element.id)}>Delete</button>
+
+         </div>))
 
             return(
                 <div>
                     
-                    <Product products ={products}/>
+                    <Product newProducts ={newProducts}/>
                     <h1>Dashboard</h1>
-                    {JSON.stringify(products)}
-                    {/* {this.props.products} */}
+                    {newProducts}
+                    {this.props.getProducts}
+                    {this.props.deleteItem}
                     
                 </div>
     
             )
         }
     }
+
+    
+export default Dashboard;
+
         
 
 
@@ -66,5 +76,3 @@ class Dashboard extends Component{
 
 
 
-
-export default Dashboard;

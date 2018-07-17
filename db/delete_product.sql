@@ -1,0 +1,1 @@
+DELETE FROM products_sh WHERE id = $1;

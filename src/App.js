@@ -6,40 +6,50 @@ import Header from './component/Header/Header';
 import axios from 'axios';
 
 class App extends Component {
-  constructor(){
-        super()
-        this.state = {
-        
-          products:[]
-          
-        }
-        this.getInventory = this.getInventory.bind(this)
-      
-      }
-      getInventory(){
-        axios.get('/api/inventory').then((results) => {
-          this.setState({products: results.data})
-        })
+  constructor(props) {
+    super(props)
+    this.state = {
 
-      }
-      componentDidMount(){
-        this.getInventory()
-            
-          }
-    
-    
-    render() {
-      return (
-        <div className="App">
-        {this.state.products}
-          <Dashboard products={this.state.products}/>
-          <Form getInventory = {this.getInventory}/>
-          <Header/>
-        </div>
-      );
+      products: []
+
     }
-  }
+    this.getInventory = this.getInventory.bind(this);
+    this.deleteProduct = this.deleteProduct.bind(this);
     
+
+  }
+
+  getInventory() {
+    axios.get('/api/inventory').then((results) => {
+      this.setState({ products: results.data })
+    })
+
+  }
+  componentDidMount() {
+    axios.get('/api/inventory').then((results) => {
+      this.setState({ products: results.data })
+    })
+  }
+  deleteProduct(id) {
+    axios.delete(`/api/product/${id}`)
+    this.getInventory();
+}
+
+
+  render() {
+    return (
+      <div className="App">
+        {JSON.stringify(this.state.products)}
+        <Dashboard products={this.state.products} 
+        getProducts={this.getInventory}
+        deleteItem ={this.deleteProduct} />
+        <Form getInventory={this.getInventory} />
+        <Header />
+      </div>
+    );
+  }
+}
+
 
 // class App extends Component {
 //   constructor(props){
